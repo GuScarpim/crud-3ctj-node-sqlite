@@ -14,12 +14,6 @@ const getProducts = (req, response) => {
   })
 }
 
-const getProductsById = (req, response) => {
-  /**
-   * Façam a busca por id utilizando o mesmo padrão das outras controllers
-   */
-}
-
 const createProducts = (req, res) => {
   const { name, email, url, produto, preco } = req.body;
 

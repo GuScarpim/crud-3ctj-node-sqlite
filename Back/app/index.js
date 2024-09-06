@@ -4,7 +4,7 @@ const app = express();
 const port = 3000;
 const productsRoutes = require('./routes/products');
 
-// Habilitar CORS para localhost:3000
+// Habilitar CORS para localhost:5173
 app.use(cors({
   origin: 'http://localhost:5173'
 }));
