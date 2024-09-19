@@ -9,72 +9,27 @@ import {
   Box,
   Button
 } from '@mui/material';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import BasicModal from '../Modal';
-
+import { useProducts } from '../../hook/useProducts';
 
 export default function BasicTable() {
-  const URI = 'http://localhost:3000';
-  const [products, setProducts] = useState([]);
-  const [selectedProduct, setSelectedProduct] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [editMode, setEditMode] = useState(false);
-
-  const fetchProducts = async () => {
-    try {
-      const response = await fetch(`${URI}/products`);
-      const productsData = await response.json();
-      console.log('productsData', productsData);
-      setProducts(productsData.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const handleDeleteProduct = async (id) => {
-    try {
-      await fetch(`${URI}/products/${id}`, { method: 'DELETE' });
-      fetchProducts();
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const handleSaveProduct = async () => {
-    const method = editMode ? 'PUT' : 'POST';
-    const url = editMode ? `/products/${selectedProduct.id}` : '/products'
-
-    try {
-      await fetch(`${URI}${url}`, {
-        method,
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(selectedProduct)
-      });
-      fetchProducts();
-      handleCloseModal();
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
-
-  const handleOpenModal = (product = null, editMode = false) => {
-    setSelectedProduct(product || { name: '', email: '', produto: '', preco: '' });
-    setIsModalOpen(true);
-    setEditMode(editMode);
-  };
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setSelectedProduct({ ...selectedProduct, [name]: value });
-  };
+  const {
+    editMode,
+    fetchProducts,
+    handleDeleteProduct,
+    handleInputChange,
+    handleOpenModal,
+    handleSaveProduct,
+    handleCloseModal,
+    isModalOpen,
+    products,
+    selectedProduct
+  } = useProducts();
 
   useEffect(() => {
     fetchProducts();
-  }, []);
+  }, [fetchProducts]);
 
   return (
     <TableContainer component={Paper}>
@@ -112,7 +67,7 @@ export default function BasicTable() {
               <TableCell>{product.email}</TableCell>
               <TableCell>{product.produto}</TableCell>
               <TableCell>{product.preco}</TableCell>
-              <TableCell><img src={product.url} style={{ width: 40, height: 40, objectFit: 'cover' }}/></TableCell>
+              <TableCell><img src={product.url} style={{ width: 40, height: 40, objectFit: 'cover' }} /></TableCell>
               <TableCell>
                 <Box component="section" sx={{ display: 'flex', justifyContent: 'center', gap: 1 }}>
                   <Button variant="contained" color="secondary" onClick={() => handleOpenModal(product, true)}>Editar</Button>

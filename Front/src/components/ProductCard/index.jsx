@@ -20,7 +20,7 @@ export default function ProductCard({ product }) {
       <Box sx={{ display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
         <CardContent>
           <Typography component="div" variant="h6">
-            {product.name}
+           {product.name}
           </Typography>
           <Typography variant="subtitle1" color="text.secondary" component="div">
             {product.email}

@@ -72,9 +72,11 @@ export default function BasicModal({
           fullWidth
         />
         <Box styles={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
-          <Button onClick={onSaveProduct} variant="contained" color="primary" sx={{ width: '100%', mt: 2 }}>{
-            isEditMode ? 'Salvar alterações' : 'Cadastrar produto'
-          }</Button>
+          <Button onClick={onSaveProduct} variant="contained" color="primary" sx={{ width: '100%', mt: 2 }}>
+            {
+              isEditMode ? 'Salvar alterações' : 'Cadastrar produto'
+            }
+          </Button>
           <Button onClick={onClose} variant="outlined" sx={{ width: '100%', mt: 1 }}>Cancelar</Button>
         </Box>
       </Box>

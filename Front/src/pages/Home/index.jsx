@@ -1,26 +1,15 @@
 import { Grid } from '@mui/material';
 import NavBar from '../../components/NavBar';
 import ProductCard from '../../components/ProductCard';
-import { useEffect, useState } from 'react';
+import { useProducts } from '../../hook/useProducts';
+import { useEffect } from 'react';
 
 const Home = () => {
-  const URI = 'http://localhost:3000';
-  const [products, setProducts] = useState([]);
-
-  const fetchProducts = async () => {
-    try {
-      const response = await fetch(`${URI}/products`);
-      const productsData = await response.json();
-      console.log('productsData', productsData);
-      setProducts(productsData.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  const { fetchProducts, products } = useProducts();
 
   useEffect(() => {
-    fetchProducts();
-  }, [])
+    fetchProducts()
+  }, [fetchProducts])
 
   return (
     <>
