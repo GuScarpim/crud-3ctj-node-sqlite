@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 
 export const useProducts = () => {
-  const URI = 'http://localhost:3000'; // Rota URI
+  const URI = 'https://crud-3ctj-node-sqlite-1.onrender.com'; // Rota URI
 
   const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
